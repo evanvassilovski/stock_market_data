@@ -9,7 +9,7 @@ def daily_config():
         }
     }
 
-daily_3am_schedule = ScheduleDefinition(
+daily_schedule = ScheduleDefinition(
     job=pipeline,
     cron_schedule="30 21 * * *",  # Runs every day at 3 AM
     execution_timezone="US/Eastern",  # Eastern time zone

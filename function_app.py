@@ -2,6 +2,7 @@ import azure.functions as func
 import datetime
 import json
 import logging
+from jobs import pipeline
 
 app = func.FunctionApp()
 
@@ -13,3 +14,5 @@ def run_pipeline(myTimer: func.TimerRequest) -> None:
         logging.info('The timer is past due!')
 
     logging.info('Python timer trigger function executed.')
+
+    pipeline.execute_in_process()

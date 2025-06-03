@@ -7,7 +7,7 @@ from jobs import pipeline
 app = func.FunctionApp()
 
 @app.timer_trigger(schedule="0 30 1 * * *", arg_name="myTimer", run_on_startup=False,
-              use_monitor=False) 
+              use_monitor=True) 
 def run_pipeline(myTimer: func.TimerRequest) -> None:
     
     if myTimer.past_due:

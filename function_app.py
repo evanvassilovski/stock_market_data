@@ -3,6 +3,7 @@ import datetime
 import json
 import logging
 from jobs import pipeline
+from pipeline_sched import daily_config
 
 app = func.FunctionApp()
 
@@ -15,4 +16,4 @@ def run_pipeline(myTimer: func.TimerRequest) -> None:
 
     logging.info('Python timer trigger function executed.')
 
-    pipeline.execute_in_process()
+    pipeline.execute_in_process(run_config=daily_config())

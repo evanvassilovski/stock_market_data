@@ -265,6 +265,9 @@ def getFREDData():
         }
         
         res = requests.get(URL, params=params)
+        print(f"Status: {res.status_code}")
+        print(f"Headers: {res.headers}")
+        print(f"Text: {res.text[:500]}")
         data = res.json()
         data = data['observations']
         data = pd.DataFrame(data)
@@ -376,22 +379,3 @@ def getFREDData():
     allData = allData.sort_values('Date')
 
     return allData
-
-'''
-with engine.begin() as conn:
-    # Delete all existing rows from the table
-    conn.execute(text("DELETE FROM fred_data"))
-
-engine = get_engine()
-from sqlalchemy import MetaData, Table
-for i in range(0, len(fred_data), 50000):
-    print(i)
-    dat = fred_data[i:i+50000]
-    with engine.begin() as conn:
-        metadata = MetaData()
-        table = Table('fred_data', metadata, autoload_with=engine)
-        conn.execute(
-            table.insert(),
-            dat.to_dict('records')
-        )
-'''

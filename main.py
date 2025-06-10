@@ -268,7 +268,12 @@ def getFREDData():
         print(f"Status: {res.status_code}")
         print(f"Headers: {res.headers}")
         print(f"Text: {res.text[:500]}")
-        data = res.json()
+        try:
+            data = res.json()
+        except Exception as e:
+            print("JSON decode failed. Response was:")
+            print(res.text)
+            raise e
         data = data['observations']
         data = pd.DataFrame(data)
         if indicator == 'interest':
